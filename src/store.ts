@@ -90,7 +90,7 @@ export const useStore = create<BookmarkStore>((set, get) => ({
   setSearchTerm: (term) => set({ searchTerm: term }),
   setActiveView: (view) => set({ activeView: view }),
   toggleAddModal: () => set((state) => ({ isAddModalOpen: !state.isAddModalOpen })),
-  toggleEditModal: (bookmark = null) => 
+  toggleEditModal: (bookmark = undefined) => 
     set((state) => ({ 
       isEditModalOpen: !state.isEditModalOpen,
       editingBookmark: bookmark,
