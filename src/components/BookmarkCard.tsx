@@ -9,8 +9,9 @@ export const BookmarkCard = ({ bookmark }: { bookmark: Bookmark }) => {
 
   return (
     <motion.div
-      whileHover={{ scale: 1.02 }}
-      className="bg-gray-800 rounded-lg overflow-hidden group"
+      whileHover={{ scale: 1.05, boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)' }}
+      transition={{ duration: 0.2 }}
+      className="bg-gray-800 rounded-lg overflow-hidden"
     >
       {bookmark.wallpaper && (
         <div className="relative h-32 w-full overflow-hidden">
@@ -61,25 +62,30 @@ export const BookmarkCard = ({ bookmark }: { bookmark: Bookmark }) => {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               onClick={() => togglePin(bookmark.id)}
-              className={`text-gray-400 hover:text-white ${
+              initial={{ scale: bookmark.isPinned ? 1.1 : 1 }}
+              animate={{ scale: bookmark.isPinned ? 1.1 : 1 }}
+              transition={{ type: 'spring', stiffness: 300, damping: 10 }}
+              className={`text-white hover:text-yellow-500 ${
                 bookmark.isPinned ? 'text-yellow-500' : ''
               }`}
             >
               <Pin size={20} />
             </motion.button>
             <motion.button
-              whileHover={{ scale: 1.1 }}
+              whileHover={{ scale: 1.2, translateY: -2 }}
               whileTap={{ scale: 0.9 }}
+              transition={{ type: 'spring', stiffness: 400, damping: 10 }}
               onClick={() => toggleEditModal(bookmark)}
-              className="text-gray-400 hover:text-blue-500"
+              className="text-white hover:text-blue-500"
             >
               <Edit2 size={20} />
             </motion.button>
             <motion.button
-              whileHover={{ scale: 1.1 }}
+              whileHover={{ scale: 1.2, translateY: -2 }}
               whileTap={{ scale: 0.9 }}
+              transition={{ type: 'spring', stiffness: 400, damping: 10 }}
               onClick={() => deleteBookmark(bookmark.id)}
-              className="text-gray-400 hover:text-red-500"
+              className="text-white hover:text-red-500"
             >
               <Trash2 size={20} />
             </motion.button>

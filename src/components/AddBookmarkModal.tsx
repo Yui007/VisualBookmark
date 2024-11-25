@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Loader2 } from 'lucide-react';
 import { useStore } from '../store';
-import { takeScreenshot } from '../utils/screenshot';
+import { ScreenshotService } from '../utils/screenshot';
 
 export const AddBookmarkModal = () => {
   const { isAddModalOpen, toggleAddModal, addBookmark, collections } = useStore();
@@ -20,7 +20,8 @@ export const AddBookmarkModal = () => {
     if (url) {
       setIsLoading(true);
       try {
-        const screenshot = await takeScreenshot(url);
+        const screenshot = await ScreenshotService.captureScreenshot(url);
+        console.log('Screenshot captured:', screenshot);
         if (screenshot) {
           setFormData(prev => ({ ...prev, wallpaper: screenshot }));
         }

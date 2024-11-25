@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Link, FolderOpen, Hash, Pin } from 'lucide-react';
 import { useStore } from '../store';
 import { Bookmark } from '../types';
+import { BookmarkCard } from './BookmarkCard';
 
 export const Dashboard = () => {
   const { bookmarks, collections, activeView, getAllTags } = useStore();
@@ -102,58 +103,6 @@ const StatCard = ({
     <div>
       <p className="text-2xl font-bold text-white">{value}</p>
       <p className="text-gray-400 text-sm">{label}</p>
-    </div>
-  </motion.div>
-);
-
-const BookmarkCard = ({ bookmark }: { bookmark: Bookmark }) => (
-  <motion.div
-    whileHover={{ scale: 1.02 }}
-    className="bg-gray-800 rounded-lg overflow-hidden"
-  >
-    {bookmark.wallpaper && (
-      <div className="h-32 w-full overflow-hidden">
-        <img
-          src={bookmark.wallpaper}
-          alt=""
-          className="w-full h-full object-cover"
-        />
-      </div>
-    )}
-    <div className="p-4">
-      <div className="flex items-start justify-between">
-        <div className="flex items-center space-x-3">
-          {bookmark.favicon && (
-            <img
-              src={bookmark.favicon}
-              alt=""
-              className="w-8 h-8 rounded"
-            />
-          )}
-          <div>
-            <h3 className="text-white font-medium">{bookmark.title}</h3>
-            <p className="text-gray-400 text-sm">{bookmark.url}</p>
-            <div className="flex flex-wrap gap-2 mt-2">
-              {bookmark.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="text-xs bg-gray-700 text-gray-300 px-2 py-1 rounded"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
-          </div>
-        </div>
-        <button
-          onClick={() => useStore.getState().togglePin(bookmark.id)}
-          className={`text-gray-400 hover:text-white ${
-            bookmark.isPinned ? 'text-yellow-500' : ''
-          }`}
-        >
-          <Pin size={20} />
-        </button>
-      </div>
     </div>
   </motion.div>
 );
